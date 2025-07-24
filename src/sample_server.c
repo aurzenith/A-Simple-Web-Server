@@ -40,7 +40,13 @@ int main(int argc, char* argv[])
     // for reading from recv()
     char buff[2048];
     memset(buff, 0, sizeof(buff));
-    
+
+    const char* message = { "HTTP/1.1 200 OK\r\nContent-Type: text/html;" 
+        "charset=UTF-8\r\n"
+        "Content-Length: 256\r\nConnection: Close\r\n"
+        "Cache-Control: no-cache\r\n"
+        "<!DOCTYPE HTML><body><p>HELLO</p></body>"
+    };
 
     // set hints up
     memset(&hints, 0, sizeof(hints));
@@ -85,9 +91,10 @@ int main(int argc, char* argv[])
     // receive data and put it in a string
     recv(newfd, buff, 2048, 0);
 
+    send(newfd, message, 2048, 0);
+
+
     printf("%s", buff);
-
-
 
 
     // clean up
