@@ -12,9 +12,6 @@
 
 
 
-
-
-
 int main(int argc, char* argv[]) 
 {
 
@@ -41,12 +38,27 @@ int main(int argc, char* argv[])
     char buff[2048];
     memset(buff, 0, sizeof(buff));
 
-    const char* message = { "HTTP/1.1 200 OK\r\nContent-Type: text/html;" 
-        "charset=UTF-8\r\n"
-        "Content-Length: 256\r\nConnection: Close\r\n"
-        "Cache-Control: no-cache\r\n"
-        "<!DOCTYPE HTML><body><p>HELLO</p></body>"
+    const char* html_content = { 
+        "<!DOCTYPE HTML>"
+        "<body>"
+        "<p>HELLO WORLD</p>"
+        "</body>"
     };
+
+    int html_size = strlen(html_content);
+
+    char http_response[512];
+    
+    snprintf(http_response, sizeof(http_response), 
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Type: text/html;" 
+        "charset=UTF-8\r\n"
+        "Content-Length: %d\r\n"
+        "Connection: Close\r\n"
+        "Cache-Control: no-cache\r\n"
+        "\r\n"
+        "%s", html_size, html_content
+    );
 
     // set hints up
     memset(&hints, 0, sizeof(hints));
@@ -91,7 +103,7 @@ int main(int argc, char* argv[])
     // receive data and put it in a string
     recv(newfd, buff, 2048, 0);
 
-    send(newfd, message, 2048, 0);
+    send(newfd, http_response, 2048, 0);
 
 
     printf("%s", buff);

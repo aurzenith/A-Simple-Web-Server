@@ -1,0 +1,1 @@
+/usr/bin/gcc -g -Wl,--dependency-file=CMakeFiles/simple_web_server.dir/link.d CMakeFiles/simple_web_server.dir/src/html_reader.c.o CMakeFiles/simple_web_server.dir/src/main.c.o CMakeFiles/simple_web_server.dir/src/web_server.c.o -o /home/risc/source/A-Simple-Web-Server/bin/simple_web_server
