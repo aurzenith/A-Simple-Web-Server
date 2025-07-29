@@ -1,3 +1,6 @@
 .vscode
 
-sample_server
+example/sample_server
+
+build/*
+!build/build.xml
