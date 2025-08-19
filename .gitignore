@@ -2,5 +2,7 @@
 
 example/sample_server
 
+bin
+
 build
 !build/build.xml
