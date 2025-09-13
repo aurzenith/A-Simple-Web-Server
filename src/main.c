@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     char html_content[] = { 
         "<!DOCTYPE HTML>"
         "<body>"
-        "<p>HELLO</p>"
+        "<p>HELLO Sarah!</p>"
         "</body>"
     };
 
