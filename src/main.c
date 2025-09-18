@@ -1,28 +1,36 @@
+/* Kris 2025-07-25*/
+
 #include "web_server.h"
-// most of the functions will return an error number -1 if failed
-    
+#include "html_reader.h"
 
 
 int main(int argc, char** argv) {
     int errorValue;
+    FILE* html_fptr;
+    char* html_file = "../index.html";
     struct addrinfo hints, *servInfo;
     char buff[2048];
     char* http_response;
 
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_socktype = SOCK_STREAM; 
 
+    html_fptr = fopen(html_file, "r");
+    if (html_file == NULL) {
+       printf("Error opening file");
+       return 1;
+    }
 
-    // will be replaced with file
-    char html_content[] = { 
-        "<!DOCTYPE HTML>"
-        "<body>"
-        "<p>HELLO Sarah!</p>"
-        "</body>"
-    };
+    char* html_content = readHTMLFile(html_fptr);
+    if (html_content == NULL) {
+        printf("Error reading file");
+        return 1;
+    }
 
+    printf("%s", html_content);
 
+    
     // manually inputted for now,
     char* ipAddr = "127.0.0.1";
     struct sockaddr_storage client_addr;
@@ -33,7 +41,7 @@ int main(int argc, char** argv) {
     char* port = "8080";
 
 
-
+    // set up addressing in its struct
     if ((errorValue = getaddrinfo(ipAddr, port, &hints, &servInfo)) != 0) {
         fprintf(stderr, "getaddinfo: %s\n", gai_strerror(errorValue));
         return 1;
@@ -54,6 +62,7 @@ int main(int argc, char** argv) {
         return 4;
     }
 
+    // keep server open for multiple requests
     while(1) {
         clientsockfd = accept(servsockfd, (struct sockaddr*) &client_addr, &addr_size);
         recv(clientsockfd, buff, 2048, 0);
@@ -65,8 +74,11 @@ int main(int argc, char** argv) {
         // logging will create actual logging file stuff later...
   
     }
+        
 
     free(http_response);
+    fclose(html_fptr);
+    free(html_content);
     freeaddrinfo(servInfo);
     return 0;
 }

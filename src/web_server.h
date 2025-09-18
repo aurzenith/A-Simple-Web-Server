@@ -1,14 +1,10 @@
+/* Kris 2025-07-25*/
+
 #ifndef WEB_SERVER_H
 #define WEB_SERVER_H
 
-#include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <malloc.h>
+#include "headers.h"
+
 
 #define HTTP_HEADER_MAX_SIZE 1024
 #define HTTP_RESPONSE_MAX_SIZE 10000
