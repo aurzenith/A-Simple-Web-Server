@@ -13,7 +13,7 @@ file(GLOB_RECURSE SOURCES "src/*.c")
 
 add_executable(simple_web_server ${SOURCES})
 
-# target_link_libraries(my_web_server PUBLIC ${LIBS}) 
+target_link_libraries(my_web_server PUBLIC ${LIBS}) 
 
 target_compile_options(simple_web_server PUBLIC
     -Wall      
