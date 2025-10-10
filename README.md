@@ -1,10 +1,10 @@
 # A-Simple-Web-Server
-This a simple web server some others and I have decided to program over the summer of 2025
+This a simple web server I created over the summer of 2025 and updated as of September 2025.
 
 ## Outline
-A web server that can bind to a socket. It will be a able to read and respond to HTTP requests.
+It is able to bind to a socket, fill IPs using the getaddr_in() function, and read and respond to HTTP requests (only GET as of now).
 
-It will be able to display HTML/CSS content too. Will add a test somewhere in here
+It also has an HTML "parser" which can take an HTML file in and display the contents to a web browser.
 
 
 ### References
