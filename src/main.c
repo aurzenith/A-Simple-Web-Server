@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
 
     send(clientsockfd, http_response, strlen(http_response), 0);
 
-    // logging will create actual logging file stuff later...
+    // logging, and request handling when more integration added
   }
 
   free(http_response);
